@@ -1,21 +1,38 @@
 package entities;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Thomas on 17-6-2015.
  */
+@Entity
 public class Advertentie {
-
+    @Id
+    @GeneratedValue
+    @Column(name = "advertentieID")
+    private int advertentieId;
+    @Column(name = "advertentienaam")
     private String advertentieNaam;
+    @Column(name = "advertentiebeschrijving")
     private String advertentieBeschrijving;
+    @Column(name = "startprijs")
     private Integer startPrijs;
+    @Column(name = "advertentieactief")
     private boolean advertentieActief;
+    @Column(name = "startdatum")
     private Date startDatum;
+    @ManyToOne
+    @JoinColumn(name = "bodID")
     private Bod bod;
+    @Column(name = "gebruiker")
     private Gebruiker gebruiker;
+    @ManyToOne
+    @JoinColumn(name = "categoryID")
+    private Category category;
 
-    public Advertentie(String advertentieNaam, String advertentieBeschrijving, Integer startPrijs, boolean advertentieActief, Date startDatum, Bod bod, Gebruiker gebruiker) {
+    public Advertentie(int advertentieId, String advertentieNaam, String advertentieBeschrijving, Integer startPrijs, boolean advertentieActief, Date startDatum, Bod bod, Gebruiker gebruiker, Category category) {
+        this.advertentieId = advertentieId;
         this.advertentieNaam = advertentieNaam;
         this.advertentieBeschrijving = advertentieBeschrijving;
         this.startPrijs = startPrijs;
@@ -23,6 +40,23 @@ public class Advertentie {
         this.startDatum = startDatum;
         this.bod = bod;
         this.gebruiker = gebruiker;
+        this.category = category;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public int getAdvertentieId() {
+        return advertentieId;
+    }
+
+    public void setAdvertentieId(int advertentieId) {
+        this.advertentieId = advertentieId;
     }
 
     public Bod getBod() {

@@ -1,15 +1,25 @@
 package entities;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Thomas on 17-6-2015.
  */
+@Entity
 public class AdvertentieReactie {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "advertentiereactieID")
+    private int advertentieReactieId;
+    @Column(name = "advertentiereactietekst")
     private String advertentieReactieTekst;
+    @Column(name = "datum")
     private Date datum;
+    @Column(name = "advertentie")
     private Advertentie advertentie;
+    @OneToMany(mappedBy = "gebruikersID")
     private Gebruiker gebruiker;
 
     public AdvertentieReactie(String advertentieReactieTekst, Date datum, Advertentie advertentie, Gebruiker gebruiker) {
@@ -17,6 +27,14 @@ public class AdvertentieReactie {
         this.datum = datum;
         this.advertentie = advertentie;
         this.gebruiker = gebruiker;
+    }
+
+    public int getAdvertentieReactieId() {
+        return advertentieReactieId;
+    }
+
+    public void setAdvertentieReactieId(int advertentieReactieId) {
+        this.advertentieReactieId = advertentieReactieId;
     }
 
     public String getAdvertentieReactieTekst() {

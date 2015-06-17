@@ -43,6 +43,13 @@
         <property name="hbm2ddl.auto">create</property>
 
         <mapping class="entities.Gebruiker"/>
+        <mapping class="entities.Advertentie"/>
+        <mapping class="entities.AdvertentieReactie"/>
+        <mapping class="entities.BetalingsGegevens"/>
+        <mapping class="entities.Bod"/>
+        <mapping class="entities.Category"/>
+        <mapping class="entities.CreditCard"/>
+        <mapping class="entities.IDeal"/>
 
     </session-factory>
 </hibernate-configuration>

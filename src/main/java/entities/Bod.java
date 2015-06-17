@@ -1,15 +1,25 @@
 package entities;
 
 import java.util.Date;
+import javax.persistence.*;
 
 /**
  * Created by Thomas on 17-6-2015.
  */
+@Entity
 public class Bod {
-
+    @Id
+    @GeneratedValue
+    @Column(name = "bodID")
+    private int bodId;
+    @Column(name = "prijs")
     private Integer prijs;
+    @Column(name = "datum")
     private Date datum;
+    @Column(name = "advertentie")
+    @OneToMany(mappedBy = "bod")
     private Advertentie advertentie;
+    @Column(name = "bodvangebruiker")
     private Gebruiker bodVanGebruiker;
 
     public Bod(Integer prijs, Date datum, Advertentie advertentie, Gebruiker bodVanGebruiker) {
@@ -17,6 +27,14 @@ public class Bod {
         this.datum = datum;
         this.advertentie = advertentie;
         this.bodVanGebruiker = bodVanGebruiker;
+    }
+
+    public int getBodId() {
+        return bodId;
+    }
+
+    public void setBodId(int bodId) {
+        this.bodId = bodId;
     }
 
     public Integer getPrijs() {

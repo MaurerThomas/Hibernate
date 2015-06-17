@@ -1,9 +1,6 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Thomas on 17-6-2015.
@@ -12,7 +9,7 @@ import javax.persistence.Id;
 public class Gebruiker {
     @Id
     @GeneratedValue
-    @Column(name="gebruikersID")
+    @JoinColumn(name = "gebruiker")
     private int gebruikersId;
     @Column(name = "voornaam")
     private String voornaam;
