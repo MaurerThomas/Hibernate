@@ -16,10 +16,11 @@ public class Bod {
     private Integer prijs;
     @Column(name = "datum")
     private Date datum;
-    @Column(name = "advertentie")
-    @OneToMany(mappedBy = "bod")
+    @ManyToOne
+    @JoinColumn(name = "advertentieId")
     private Advertentie advertentie;
-    @Column(name = "bodvangebruiker")
+    @ManyToOne
+    @JoinColumn(name = "gebruikersId")
     private Gebruiker bodVanGebruiker;
 
     public Bod(Integer prijs, Date datum, Advertentie advertentie, Gebruiker bodVanGebruiker) {

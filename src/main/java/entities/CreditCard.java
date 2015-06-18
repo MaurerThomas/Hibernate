@@ -10,23 +10,14 @@ import javax.persistence.Id;
  */
 @Entity
 public class CreditCard extends BetalingsGegevens{
-    @Id
-    @GeneratedValue
-    private int id;
+
     @Column(name = "banknaam")
     private String bankNaam;
 
-    public CreditCard(String eigenaarNaam, String nummer, String bankNaam) {
-        super(eigenaarNaam, nummer);
+
+    public CreditCard(int accountID, String eigenaarNaam, String nummer, Gebruiker gebruiker, String bankNaam) {
+        super(accountID, eigenaarNaam, nummer, gebruiker);
         this.bankNaam = bankNaam;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getBankNaam() {

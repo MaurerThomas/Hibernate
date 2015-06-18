@@ -10,26 +10,16 @@ import javax.persistence.Id;
  */
 @Entity
 public class IDeal extends BetalingsGegevens {
-    @Id
-    @GeneratedValue
-    private int id;
+
     @Column(name = "vervalmaand")
     private Integer vervalMaand;
     @Column(name = "vervaljaar")
     private Integer vervalJaar;
 
-    public IDeal(String eigenaarNaam, String nummer, Integer vervalMaand, Integer vervalJaar) {
-        super(eigenaarNaam, nummer);
+    public IDeal(int accountID, String eigenaarNaam, String nummer, Gebruiker gebruiker, Integer vervalMaand, Integer vervalJaar) {
+        super(accountID, eigenaarNaam, nummer, gebruiker);
         this.vervalMaand = vervalMaand;
         this.vervalJaar = vervalJaar;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Integer getVervalMaand() {

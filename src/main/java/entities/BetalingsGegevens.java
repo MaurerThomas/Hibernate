@@ -1,23 +1,45 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 /**
  * Created by Thomas on 17-6-2015.
  */
 @Entity
 public class BetalingsGegevens {
     @Id
+    @Column(name = "accountID")
+    private int accountID;
     @Column(name = "eigenaarnaam")
     private String eigenaarNaam;
     @Column(name = "nummer")
     private String nummer;
+    @ManyToOne
+    @JoinColumn(name = "gebruikersId")
+    private Gebruiker gebruiker;
 
-    public BetalingsGegevens(String eigenaarNaam, String nummer) {
+    public BetalingsGegevens(int accountID, String eigenaarNaam, String nummer, Gebruiker gebruiker) {
         super();
+        this.accountID = accountID;
         this.eigenaarNaam = eigenaarNaam;
         this.nummer = nummer;
+        this.gebruiker = gebruiker;
+    }
+
+    public Gebruiker getGebruiker() {
+        return gebruiker;
+    }
+
+    public void setGebruiker(Gebruiker gebruiker) {
+        this.gebruiker = gebruiker;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 
     public String getEigenaarNaam() {

@@ -17,9 +17,11 @@ public class AdvertentieReactie {
     private String advertentieReactieTekst;
     @Column(name = "datum")
     private Date datum;
-    @Column(name = "advertentie")
+    @ManyToOne
+    @JoinColumn(name = "advertentieId")
     private Advertentie advertentie;
-    @OneToMany(mappedBy = "gebruikersID")
+    @ManyToOne
+    @JoinColumn(name = "gebruikersID")
     private Gebruiker gebruiker;
 
     public AdvertentieReactie(String advertentieReactieTekst, Date datum, Advertentie advertentie, Gebruiker gebruiker) {

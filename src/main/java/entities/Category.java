@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Thomas on 17-6-2015.
@@ -13,12 +14,35 @@ public class Category {
     private int categoryId;
     @Column(name = "categorynaam")
     private String categoryNaam;
-    @Column(name = "subcategory", nullable = true)
-    private Category parent;
+    @ManyToMany
+    @JoinTable(name = "cat_parent",
+            joinColumns = {@JoinColumn(name = "parentID", referencedColumnName = "categoryID")},
+            inverseJoinColumns = {@JoinColumn(name = "categoryID", referencedColumnName = "categoryID")})
+    private List<Category> parents;
+    @ManyToMany(mappedBy = "categories")
+    private List<Advertentie> advertenties;
 
-    public Category(String categoryNaam, Category parent) {
+
+    public Category(String categoryNaam, List<Category> parents, List<Advertentie> advertenties) {
         this.categoryNaam = categoryNaam;
-        this.parent = parent;
+        this.parents = parents;
+        this.advertenties = advertenties;
+    }
+
+    public List<Category> getParents() {
+        return parents;
+    }
+
+    public void setParents(List<Category> parents) {
+        this.parents = parents;
+    }
+
+    public List<Advertentie> getAdvertenties() {
+        return advertenties;
+    }
+
+    public void setAdvertenties(List<Advertentie> advertenties) {
+        this.advertenties = advertenties;
     }
 
     public int getCategoryId() {
@@ -37,11 +61,5 @@ public class Category {
         this.categoryNaam = categoryNaam;
     }
 
-    public Category getParent() {
-        return parent;
-    }
 
-    public void setParent(Category parent) {
-        this.parent = parent;
-    }
 }

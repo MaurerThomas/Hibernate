@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Thomas on 17-6-2015.
@@ -22,33 +23,55 @@ public class Advertentie {
     private boolean advertentieActief;
     @Column(name = "startdatum")
     private Date startDatum;
+    @OneToMany(mappedBy = "advertentie")
+    private List<Bod> biedingen;
     @ManyToOne
-    @JoinColumn(name = "bodID")
-    private Bod bod;
-    @Column(name = "gebruiker")
-    private Gebruiker gebruiker;
+    @JoinColumn(name = "verkoper", referencedColumnName = "gebruikersId")
+    private Gebruiker verkoper;
+    @ManyToMany
+    @JoinTable(name = "cat_ad",
+    joinColumns = {@JoinColumn(name = "advertentieID", referencedColumnName = "advertentieID")},
+    inverseJoinColumns = {@JoinColumn(name = "categoryID", referencedColumnName = "categoryID")})
+    private List<Category> categories;
     @ManyToOne
-    @JoinColumn(name = "categoryID")
-    private Category category;
+    @JoinColumn(name = "koper", referencedColumnName = "gebruikersId")
+    private Gebruiker koper;
 
-    public Advertentie(int advertentieId, String advertentieNaam, String advertentieBeschrijving, Integer startPrijs, boolean advertentieActief, Date startDatum, Bod bod, Gebruiker gebruiker, Category category) {
-        this.advertentieId = advertentieId;
+
+    public Advertentie(String advertentieNaam, String advertentieBeschrijving, Integer startPrijs, boolean advertentieActief, Date startDatum, List<Bod> biedingen, Gebruiker verkoper, List<Category> categories, Gebruiker koper) {
         this.advertentieNaam = advertentieNaam;
         this.advertentieBeschrijving = advertentieBeschrijving;
         this.startPrijs = startPrijs;
         this.advertentieActief = advertentieActief;
         this.startDatum = startDatum;
-        this.bod = bod;
-        this.gebruiker = gebruiker;
-        this.category = category;
+        this.biedingen = biedingen;
+        this.verkoper = verkoper;
+        this.categories = categories;
+        this.koper = koper;
     }
 
-    public Category getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public Gebruiker getVerkoper() {
+        return verkoper;
+    }
+
+    public void setVerkoper(Gebruiker verkoper) {
+        this.verkoper = verkoper;
+    }
+
+    public Gebruiker getKoper() {
+        return koper;
+    }
+
+    public void setKoper(Gebruiker koper) {
+        this.koper = koper;
     }
 
     public int getAdvertentieId() {
@@ -59,21 +82,14 @@ public class Advertentie {
         this.advertentieId = advertentieId;
     }
 
-    public Bod getBod() {
-        return bod;
+    public List<Bod> getBiedingen() {
+        return biedingen;
     }
 
-    public void setBod(Bod bod) {
-        this.bod = bod;
+    public void setBiedingen(List<Bod> biedingen) {
+        this.biedingen = biedingen;
     }
 
-    public Gebruiker getGebruiker() {
-        return gebruiker;
-    }
-
-    public void setGebruiker(Gebruiker gebruiker) {
-        this.gebruiker = gebruiker;
-    }
 
     public String getAdvertentieNaam() {
         return advertentieNaam;

@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Thomas on 17-6-2015.
@@ -9,7 +10,7 @@ import javax.persistence.*;
 public class Gebruiker {
     @Id
     @GeneratedValue
-    @JoinColumn(name = "gebruiker")
+    @Column(name = "gebruikersID")
     private int gebruikersId;
     @Column(name = "voornaam")
     private String voornaam;
@@ -19,18 +20,38 @@ public class Gebruiker {
     private String email;
     @Column(name = "wachtwoord")
     private String wachtwoord;
-   /*
-    @Column(name = "betalingsgegevens")
-    private BetalingsGegevens betalingsGegevens;
-    */
-    public Gebruiker(String voornaam, String achternaam, String email, String wachtwoord, BetalingsGegevens betalingsGegevens) {
+    @OneToMany(mappedBy = "accountID")
+    private List<BetalingsGegevens> betalingsGegevens;
+    @OneToMany(mappedBy = "koper")
+    private List<Advertentie> advertenties;
+    @OneToMany(mappedBy = "advertentieReactieId")
+    private List<AdvertentieReactie> advertentieReacties;
+
+
+    public Gebruiker(String voornaam, String achternaam, String email, String wachtwoord, List<BetalingsGegevens> betalingsGegevens, List<Advertentie> advertenties, List<AdvertentieReactie> advertentieReacties) {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.email = email;
         this.wachtwoord = wachtwoord;
-        /*
         this.betalingsGegevens = betalingsGegevens;
-        */
+        this.advertenties = advertenties;
+        this.advertentieReacties = advertentieReacties;
+    }
+
+    public List<Advertentie> getAdvertenties() {
+        return advertenties;
+    }
+
+    public void setAdvertenties(List<Advertentie> advertenties) {
+        this.advertenties = advertenties;
+    }
+
+    public List<AdvertentieReactie> getAdvertentieReacties() {
+        return advertentieReacties;
+    }
+
+    public void setAdvertentieReacties(List<AdvertentieReactie> advertentieReacties) {
+        this.advertentieReacties = advertentieReacties;
     }
 
     public int getGebruikersId() {
@@ -73,13 +94,11 @@ public class Gebruiker {
         this.wachtwoord = wachtwoord;
     }
 
-    /*
-    public BetalingsGegevens getBetalingsGegevens() {
+    public List<BetalingsGegevens> getBetalingsGegevens() {
         return betalingsGegevens;
     }
 
-    public void setBetalingsGegevens(BetalingsGegevens betalingsGegevens) {
+    public void setBetalingsGegevens(List<BetalingsGegevens> betalingsGegevens) {
         this.betalingsGegevens = betalingsGegevens;
     }
-    */
 }
