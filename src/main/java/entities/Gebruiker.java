@@ -7,6 +7,7 @@ import java.util.List;
  * Created by Thomas on 17-6-2015.
  */
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 public class Gebruiker {
     @Id
     @GeneratedValue
@@ -17,7 +18,7 @@ public class Gebruiker {
     @Column(name = "achternaam")
     private String achternaam;
     @Column(name = "email")
-    private String email;
+     private String email;
     @Column(name = "wachtwoord")
     private String wachtwoord;
     @OneToMany(mappedBy = "accountID")
