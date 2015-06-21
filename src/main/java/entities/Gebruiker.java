@@ -25,8 +25,6 @@ public class Gebruiker {
     private List<BetalingsGegevens> betalingsGegevens;
     @OneToMany(mappedBy = "koper")
     private List<Advertentie> advertenties;
-    @OneToMany(mappedBy = "advertentieReactieId")
-    private List<AdvertentieReactie> advertentieReacties;
 
 
     public Gebruiker(String voornaam, String achternaam, String email, String wachtwoord, List<BetalingsGegevens> betalingsGegevens, List<Advertentie> advertenties, List<AdvertentieReactie> advertentieReacties) {
@@ -36,7 +34,6 @@ public class Gebruiker {
         this.wachtwoord = wachtwoord;
         this.betalingsGegevens = betalingsGegevens;
         this.advertenties = advertenties;
-        this.advertentieReacties = advertentieReacties;
     }
 
     public List<Advertentie> getAdvertenties() {
@@ -45,14 +42,6 @@ public class Gebruiker {
 
     public void setAdvertenties(List<Advertentie> advertenties) {
         this.advertenties = advertenties;
-    }
-
-    public List<AdvertentieReactie> getAdvertentieReacties() {
-        return advertentieReacties;
-    }
-
-    public void setAdvertentieReacties(List<AdvertentieReactie> advertentieReacties) {
-        this.advertentieReacties = advertentieReacties;
     }
 
     public int getGebruikersId() {

@@ -17,10 +17,10 @@ public class AdvertentieReactie {
     private String advertentieReactieTekst;
     @Column(name = "datum")
     private Date datum;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "advertentieId")
     private Advertentie advertentie;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "gebruikersID")
     private Gebruiker gebruiker;
 

@@ -33,62 +33,11 @@ public class Advertentie {
     joinColumns = {@JoinColumn(name = "advertentieID", referencedColumnName = "advertentieID")},
     inverseJoinColumns = {@JoinColumn(name = "categoryID", referencedColumnName = "categoryID")})
     private List<Category> categories;
+    @OneToMany(mappedBy = "advertentie")
+    private List<AdvertentieReactie> reacties;
     @ManyToOne
     @JoinColumn(name = "koper", referencedColumnName = "gebruikersId")
     private Gebruiker koper;
-
-
-    public Advertentie(String advertentieNaam, String advertentieBeschrijving, Integer startPrijs, boolean advertentieActief, Date startDatum, List<Bod> biedingen, Gebruiker verkoper, List<Category> categories, Gebruiker koper) {
-        this.advertentieNaam = advertentieNaam;
-        this.advertentieBeschrijving = advertentieBeschrijving;
-        this.startPrijs = startPrijs;
-        this.advertentieActief = advertentieActief;
-        this.startDatum = startDatum;
-        this.biedingen = biedingen;
-        this.verkoper = verkoper;
-        this.categories = categories;
-        this.koper = koper;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public Gebruiker getVerkoper() {
-        return verkoper;
-    }
-
-    public void setVerkoper(Gebruiker verkoper) {
-        this.verkoper = verkoper;
-    }
-
-    public Gebruiker getKoper() {
-        return koper;
-    }
-
-    public void setKoper(Gebruiker koper) {
-        this.koper = koper;
-    }
-
-    public int getAdvertentieId() {
-        return advertentieId;
-    }
-
-    public void setAdvertentieId(int advertentieId) {
-        this.advertentieId = advertentieId;
-    }
-
-    public List<Bod> getBiedingen() {
-        return biedingen;
-    }
-
-    public void setBiedingen(List<Bod> biedingen) {
-        this.biedingen = biedingen;
-    }
 
 
     public String getAdvertentieNaam() {
@@ -129,5 +78,59 @@ public class Advertentie {
 
     public void setStartDatum(Date startDatum) {
         this.startDatum = startDatum;
+    }
+
+    public List<Bod> getBiedingen() {
+        return biedingen;
+    }
+
+    public void setBiedingen(List<Bod> biedingen) {
+        this.biedingen = biedingen;
+    }
+
+    public Gebruiker getVerkoper() {
+        return verkoper;
+    }
+
+    public void setVerkoper(Gebruiker verkoper) {
+        this.verkoper = verkoper;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<AdvertentieReactie> getReacties() {
+        return reacties;
+    }
+
+    public void setReacties(List<AdvertentieReactie> reacties) {
+        this.reacties = reacties;
+    }
+
+    public Gebruiker getKoper() {
+        return koper;
+    }
+
+    public void setKoper(Gebruiker koper) {
+        this.koper = koper;
+    }
+
+    public Advertentie(String advertentieNaam, String advertentieBeschrijving, Integer startPrijs, boolean advertentieActief, Date startDatum, List<Bod> biedingen, Gebruiker verkoper, List<Category> categories, List<AdvertentieReactie> reacties, Gebruiker koper) {
+
+        this.advertentieNaam = advertentieNaam;
+        this.advertentieBeschrijving = advertentieBeschrijving;
+        this.startPrijs = startPrijs;
+        this.advertentieActief = advertentieActief;
+        this.startDatum = startDatum;
+        this.biedingen = biedingen;
+        this.verkoper = verkoper;
+        this.categories = categories;
+        this.reacties = reacties;
+        this.koper = koper;
     }
 }

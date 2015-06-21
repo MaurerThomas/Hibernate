@@ -16,18 +16,18 @@ public class Bod {
     private Integer prijs;
     @Column(name = "datum")
     private Date datum;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "advertentieId")
     private Advertentie advertentie;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "gebruikersId")
-    private Gebruiker bodVanGebruiker;
+    private Gebruiker bieder;
 
-    public Bod(Integer prijs, Date datum, Advertentie advertentie, Gebruiker bodVanGebruiker) {
+    public Bod(Integer prijs, Date datum, Advertentie advertentie, Gebruiker bieder) {
         this.prijs = prijs;
         this.datum = datum;
         this.advertentie = advertentie;
-        this.bodVanGebruiker = bodVanGebruiker;
+        this.bieder = bieder;
     }
 
     public int getBodId() {
@@ -62,11 +62,11 @@ public class Bod {
         this.advertentie = advertentie;
     }
 
-    public Gebruiker getBodVanGebruiker() {
-        return bodVanGebruiker;
+    public Gebruiker getBieder() {
+        return bieder;
     }
 
-    public void setBodVanGebruiker(Gebruiker bodVanGebruiker) {
-        this.bodVanGebruiker = bodVanGebruiker;
+    public void setBieder(Gebruiker bieder) {
+        this.bieder = bieder;
     }
 }
